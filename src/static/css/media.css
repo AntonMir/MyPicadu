@@ -1,0 +1,99 @@
+@media (max-width: 990px) {
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  
+    width: 30px;
+    height: 20px;
+    margin: 0 0 0 12px;
+  }
+
+  .menu-toggle span {
+    width: 30px;
+    height: 2px;
+    background: #fff;
+  }
+
+  header {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    width: 100%;
+  }
+
+  .content {
+    margin-top: 86px;
+    margin-bottom: 60px;
+  }
+
+  .sidebar {
+    position: fixed;
+    z-index: 101;
+    top: 71px;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transform: translateX(100%);
+    transition: transform 0.2s;
+    width: 100%;
+    max-width: 320px;
+    overflow-y: auto;
+  }
+
+  .sidebar.visible {
+    transform: translateX(0);
+  }
+
+  .header-nav {
+    display: none;
+  }
+  
+  .posts {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 676px) {
+  .add-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  .add-button {
+    width: 100%;
+    max-width: 100%;
+  }
+  .add-post .button-outline {
+    margin-right: 0;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .post-footer {
+    flex-direction: column;
+  }
+  .post-author {
+    margin-top: 15px;
+  }
+  .author-avatar {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+  .author-about {
+    order: 2;
+    text-align: left;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+  
+  .sidebar {
+    max-width: 260px;
+  }
+
+}
