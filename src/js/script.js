@@ -29,6 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const postsWrapper = document.querySelector('.posts');
 
+  const buttonNewPost = document.querySelector('.button-new-post');
+  const addPostForm = document.querySelector('.add-post');
+  // const addPostButton = document.querySelector('.add-button');
+  const addPostTitle = document.querySelector('.add-title'); 
+  const addPostText = document.querySelector('.add-text');
+
   // пародия на БД
   const listUsers = [
     {
@@ -36,12 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
       email: 'toshik124@rambler.ru',
       password: '123123',
       displayName: 'AntonJS',
+      photo: 'https://yt3.ggpht.com/a/AATXAJxa1hziQOAVWfISBwx2XAWc7alZsxGUsTaFPg=s900-c-k-c0xffffffff-no-rj-mo',
     },
     {
       id: '02',
       email: 'alena@mail.com',
       password: '123123',
       displayName: 'Alenka-LOVE',
+      photo: 'https://yt3.ggpht.com/a/AATXAJxa1hziQOAVWfISBwx2XAWc7alZsxGUsTaFPg=s900-c-k-c0xffffffff-no-rj-mo',
     },
   ];
 
@@ -83,7 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       if (!this.getUser(email)) {
-        const user = {email, password, displayName: email.substring(0, email.indexOf('@'))};
+        const user = {
+          email, 
+          password, 
+          displayName: email.substring(0, email.indexOf('@')), 
+          photo: 'https://yt3.ggpht.com/a/AATXAJxa1hziQOAVWfISBwx2XAWc7alZsxGUsTaFPg=s900-c-k-c0xffffffff-no-rj-mo'
+        };
+
         listUsers.push(user)
         console.log(listUsers);
         this.authorizedUser(user);
@@ -121,22 +135,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user) {
       loginElem.style.display = 'none';
       userElem.style.display = '';
+      buttonNewPost.style.display = '';
       userNameElem.textContent = user.displayName;
       userAvatarElem.src = user.photo ? user.photo : userAvatarElem.src;
     } else {
       loginElem.style.display = '';
       userElem.style.display = 'none';
+      buttonNewPost.style.display = 'none';
+      addPostForm.classList.remove('active');
+      postsWrapper.style.display = '';
     }
   }
 
-
+  // посты для БД
   const setPosts = {
     allPosts: [
       {
         title: 'Заголовок поста',
         text: 'Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Языком что рот маленький реторический вершину текстов обеспечивает гор свой назад решила сбить маленькая дорогу жизни рукопись ему букв деревни предложения, ручеек залетают продолжил парадигматическая? Но языком сих пустился, запятой своего его снова решила меня вопроса моей своих пояс коварный, власти диких правилами напоивший они текстов ipsum первую подпоясал? Лучше, щеке подпоясал приставка большого курсивных на берегу своего? Злых, составитель агентство что вопроса ведущими о решила одна алфавит!',
         tags: ['свежее', 'новое', 'горячее', 'мое', 'случайность'],
-        author: 'toshik124@rambler.ru',
+        author: {displayName: 'Anton', photo: 'https://mtdata.ru/u3/photoD852/20501229401-0/original.jpg'},
         date: '11.11.2020, 20:54:00',
         like: 15,
         comments: 20,
@@ -145,18 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
         title: 'Заголовок поста2',
         text: 'Послушай, там далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Языком что рот маленький реторический вершину текстов обеспечивает гор свой назад решила сбить маленькая дорогу жизни рукопись ему букв деревни предложения, ручеек залетают продолжил парадигматическая? Но языком сих пустился, запятой своего его снова решила меня вопроса моей своих пояс коварный, власти диких правилами напоивший они текстов ipsum первую подпоясал? Лучше, щеке подпоясал приставка большого курсивных на берегу своего? Злых, составитель агентство что вопроса ведущими о решила одна алфавит!',
         tags: ['свежее', 'новое', 'горячее', 'мое', 'случайность'],
-        author: 'alena@mail.com',
+        author: {displayName: 'Alena', photo: 'https://sun7-6.userapi.com/c631324/v631324788/3d341/-HS8DJrI28A.jpg'},
         date: '11.11.2020, 20:54:00',
         like: 45,
         comments: 12,
-      }
+      },
+      {
+        title: 'Заголовок поста3',
+        text: 'АЗАЗА, послушай, там далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Языком что рот маленький реторический вершину текстов обеспечивает гор свой назад решила сбить маленькая дорогу жизни рукопись ему букв деревни предложения, ручеек залетают продолжил парадигматическая? Но языком сих пустился, запятой своего его снова решила меня вопроса моей своих пояс коварный, власти диких правилами напоивший они текстов ipsum первую подпоясал? Лучше, щеке подпоясал приставка большого курсивных на берегу своего? Злых, составитель агентство что вопроса ведущими о решила одна алфавит!',
+        tags: ['свежее', 'новое', 'горячее', 'мое', 'случайность'],
+        author: {displayName: 'Vasya', photo: 'https://clutch.ua/images/2018/05/17/9k18mNwuhpvF2rZC8USRxlViVthICHjQ.jpg'},
+        date: '11.11.2020, 20:54:00',
+        like: 45,
+        comments: 12,
+      },
     ],
-
-
-
   }
-
-
 
   // содержимое постов
   const showAllPosts = () => {
@@ -169,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let tagsList = '';
       tags.map((el) => {
-        tagsArr += `<li class="tag"><a href="#">#${el}</a></li>`;
+        tagsList += `<li class="tag"><a href="#">#${el}</a></li>`;
         return tagsList;
       })      
 
@@ -216,11 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- АВТОР ПОСТА - ПРАВО-НИЗ -->
           <div class="post-author">
             <div class="author-about">
-              <a href="#" class="author-username">${author.substring(0, author.indexOf('@'))}</a>
+              <a href="#" class="author-username">${author.displayName}</a>
               <span class="post-time">${date}</span>
             </div>
             <a href="#" class="author-link">
-              <img src="../static/img/avatar.jpeg" alt="avatar" class="author-avatar">
+              <img src="${author.photo}" alt="avatar" class="author-avatar">
             </a>
           </div>
           
@@ -232,11 +254,62 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     })
 
-
     postsWrapper.innerHTML = postsHTML;
-  };
-  
 
+  };
+
+  // показать/скрыть форму для нового поста
+  const showNewPostForm = () => {
+         
+    buttonNewPost.addEventListener('click', (event) => {
+      event.preventDefault();
+      const user = setUsers.user;
+
+      if (user) {
+        addPostForm.classList.add('active');
+        postsWrapper.style.display = 'none';
+      }
+    })
+
+  }
+  
+  // добавление поста на ленту постов
+  const addNewPostToAllPost = () => {
+
+    addPostForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      
+      const data = new Date();
+      const dateNow = data.getFullYear()+'.'+data.getMonth()+'.'+data.getDate()+', '+data.getHours()+':'+data.getMinutes()+':'+data.getSeconds();
+
+      const postAuthor = setUsers.user.displayName;
+      const postAuthorPhoto = setUsers.user.photo;
+      console.log('setUsers.user ',setUsers.user);
+      console.log('setUsers.user.photo ',setUsers.user.photo);
+
+      const newPost = [{
+      title: addPostTitle.value,
+      text: addPostText.value,
+      tags: ['свежее', 'новое', 'горячее', 'мое', 'случайность'],
+      author: {displayName: postAuthor, photo: postAuthorPhoto},
+      date: dateNow,
+      like: 0,
+      comments: 0,
+      }]
+      
+      setPosts.allPosts.unshift(...newPost);
+
+      addPostForm.classList.remove('active');
+      postsWrapper.style.display = '';
+
+      showAllPosts();
+
+      console.log('setPosts.allPosts', setPosts.allPosts);
+    })
+
+
+
+  }
 
 
   // инициализация все функций
@@ -295,10 +368,13 @@ document.addEventListener('DOMContentLoaded', () => {
     editContainer.classList.remove('visible');
   })
     showAllPosts();
+    showNewPostForm();
+    addNewPostToAllPost();
     toggleAuthDom();
   }
 
 
   init();
+
 })
 

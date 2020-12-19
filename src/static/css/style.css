@@ -399,8 +399,9 @@ header {
 
 /* ОПУБЛИКОВАТЬ ПОСТ КНОПКА */
 .button-new-post {
-  display: none;
+  display: flex;
   justify-content: center;
+  align-items:center;
   background: rgb(247, 165, 42);
   padding: 13px;
   margin: 20px 0 0;
@@ -412,7 +413,7 @@ header {
 }
 
 .button-new-post .icon {
-  fill: rgb(140,140,140);
+  fill: rgb(238, 0, 0);
   margin: 0 7px 0 0;
 }
 
@@ -476,9 +477,15 @@ header {
 
 /* NEW POTS PAGE */
 .add-post {
+  display: none;
+}
+
+.add-post.active {
   display: flex;
   flex-direction: column;
+  width: 67%;
 }
+
 .add-title,
 .add-text {
   background: #ffffff;
@@ -512,9 +519,10 @@ header {
   line-height: 24px;
   padding: 13px 16px;
   cursor: pointer;
+  margin-left: 1%;
 }
 
-.add-post .button-outline {
+.add-post {
   margin-right: 1%;
 }
 
